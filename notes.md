@@ -30,7 +30,7 @@ Layers:
 - Physical
 
 ### Internet Protocol Suite (TCP/IP)
-A model focused on the cope of communication (LAN, Inter-network, etc)
+A model focused on the scope of communication (LAN, Inter-network, etc)
 TCP/IP roughly maps to summarize layers of the OSI Model
 - Application (Application, Presentation, Session, Transport)
 - Tansport (Session, Transport)
@@ -55,13 +55,15 @@ This works like encapsulation or API's where the implementation isn't necessary,
 Cables, wires, waves, etc. concerned with transfer of bits and signals.
 
 ### Methods of Transmission
-Electrical signals are used for Ethernet cables.
+#### Electrical signals are used for Ethernet cables.
 - Pros: Cheap
 - Cons: Latency over distance and Interference prone
-Light Signals: Used for long-distance transmission (i.e. fiber optic or laser)
+
+#### Light Signals: Used for long-distance transmission (i.e. fiber optic or laser)
 - Pros: No Interference, instantaneous
 - Cons: Expensive
-Radio Waves: Wifi, Mobile, Satellite
+
+#### Radio Waves: Wifi, Mobile, Satellite
 - Pros: Wireless
 - Cons: Short Radius
 
@@ -72,7 +74,7 @@ Total Latency is the sum of the following parts:
 - Transmission Delay: Time to navigate Links (intersections)
 - Processing Delay: Time for data to get processed between links
 - Queuing Delay: Router bottleneck problem.  Router will buffer data by putting it in the queue.
-Other Latency Terms
+#### Other Latency Terms
 - Last-mile latency: Delays in getting from ISP to your home network (often slower than core of network travel)
 - Rount-Trip Time (RTT): Signal to be sent to point of acknolwdgement or response.
 
@@ -86,6 +88,7 @@ Where the physical layer creates connections, the data link layer determins how 
 The primary elements of this layer are:
 - Identification of the devices on the physical network
 - Moving data over the physical network between devices Hosts (Computers/Servers), switches, and routers
+
 Ethernet protocol (governed by IEEE) is most common and is comprised of **framing** and **addressing**
 
 ### Ethernet Frames
