@@ -1,13 +1,14 @@
 # The Internet
 At the simplest level of abstraction, the internet is a network of networks.
 Individual computers connect to one another using cables, wires, and waves, which communicate binary information
-based on a set of protocols
+based on a set of protocols.
 
 # OSI Model
 Comprised of 7 different layers based on Function:
-- Application (Application / Presentation / Session)
-  - HTTP: HOw to Access data via the WWW
-- Transport (Application => Router => Application)
+
+## Application (Application / Presentation / Session)
+  - HTTP: How to Access data via the WWW
+## Transport (Application => Router => Application)
   - Multiplexing/Demultiplexing: Transmitting multiple signals on single channel via network ports
   - Ports are used to identify specific applications on hosts called communication end points
   - Sockets: IP Address combined with Port creates end-to-end communication
@@ -23,7 +24,7 @@ Comprised of 7 different layers based on Function:
     - NO Congestion Avoidance, flow-control, or connection state tracking provided
     - **Datagrams** as PDU contain source, destination, length, and checksum.
     - Great as a starting place (template) or phone/video services
-- Network (Computer => Router => Computer)
+## Network (Computer => Router => Computer)
   - Inter-Network: Protocols to connect hosts on different networks
   - IP Addresses have logical structure and are used to identify devices on a network.
   - Routers accept **packets** which have the following Data:
@@ -32,7 +33,7 @@ Comprised of 7 different layers based on Function:
     - Data Payload Protocol (TCP/UDP)
     - IP Address Source & Destination
     - Checksum: Data dropped if checksum does not match
-- Data Link (Computer => Switch)
+## Data Link (Computer => Switch)
   - Mostly used to get information from host to Switch/Router (LAN level)
   - Protocols like Ethernet provide structure to binary information transfer using Frames. 
   - Frames Contain the following:
@@ -40,7 +41,7 @@ Comprised of 7 different layers based on Function:
     - Other Metadata: Length of Transmission, synchronization of clocks
     - Payload: PDU from Network Layer
     - Checksum: Data dropped if checksum does not match
-- Physical (Physical Infrastructure)
+## Physical (Physical Infrastructure)
   - Individual computers connect to one another using cables, wires, and waves, to send binary information
 
 # TCP/IP (Internet Protocol Suite) Model
@@ -108,7 +109,7 @@ The Three Way Handshake:`SYN` and `ACK` flags (Send, Acknowledge) are used to es
 1. Sender sends `SYN`
 2. Receiver responts with `SYN` and `ACK`
 3. Sender sends `ACK`
-Once final `ACK` is received, connection is established.
+4. Once final `ACK` is received, connection is established.
 
 ### Flow Control 
 Uses WINDOW header field to communicate how much data may be sent at a time to avoid overwhelming the receiver
@@ -135,12 +136,13 @@ UDP Does not:
 - provide connection state tracking
 
 ### UDP Pros
-Much faster and simpler
-Serves as a template for software engineers who want to build only the services they require.
-Example Case: Phone/Video services where dropped packets do not need to be retransmitted.
+- Much faster and simpler.
+- Serves as a template for software engineers who want to build only the services they require.
+- Example Case: Phone/Video services where dropped packets do not need to be retransmitted.
 
 # HTTP
-Applications submit HTTP requests for every piece of data it needs to load a website
+Applications submit HTTP requests for every piece of data it needs to load a website. 
+
 HTTP requests are sent in plain text and contain headers for metadata
 
 ## Request Response Cycle
@@ -151,72 +153,12 @@ HTTP requests are sent in plain text and contain headers for metadata
 5. REmote server accepts request and sends a response back to network interface
 6. Interface hands to browser and browser displays
 
-Or more simply: Clients sent HTTP requests, and servers send back HTTP Responses
-HTTP is **stateless* as each request/response is completely independent of previous ones.
-Applications which create state (logged in) are created despite HTTP's stateless transfer of information.
-
-## DNS
-DNS (Domain Name System) is a distributed system which stores Key/Value table with URI as Key and IP address as key.
-
-## URLs
-
-### Components of URLs
-5 Parts:
-1. Scheme (aka Protocol): `http`, `ftp`, `mailto` `git`.  The first part before the `://`
-2. Host: `www.example.com`. Tells client where teh resources is hosted/located
-3. Port (Optional): `:88`. Only required to override the default port
-4. Path (Optional): `/home/`. The resource being requested from host.
-5. Query String (Optional): `?item=book`. Made of query parameters (name/value pairs) used to send data to the server.
-
-Default Port: `80` used for HTTP requests
-
-### Query Strings
-Components
-- `?` => reserved character marking the start
-- `search=ruby` => parameter name/value pair
-- `&` => reserved character to add more parameters
-
-Limitations:
-- URL (including Query String) limited at 2048 characters
-- Visible in URL: not usable for sensitive information
-- Spaces & Special Characters must be encoded
-
-Encoding: Using a `%` followed by the ASCII code of reserved Characters
-When to Encode:
-1. No corresponding character in ASCII Character set
-2. Character is unsave because it is it used for encoding other characters. `%#<>{}[]~`` and more
-3. Characters reserved in URL scheme `/?:@&`
-
-Save Characters => `$-_.+!'{}"`
-
-## HTTP Request/Response Components
-
-### `GET` and `POST` methods and when to choose each
-
-### HTTP Requests:
-
-### HTTP Responses:
-
-## Status Codes with examples
-Headers included in HTTP Responses
-
-### Status Code Categories
-- Informational responses (100–199)
-- Successful responses (200–299)
-- Redirection messages (300–399)
-- Client error responses (400–499)
-- Server error responses (500–599)
-
-### Common Status Codes
-- 200: OK
-- 201: OK: new resource was created. Typically, this is the status code that is sent after a POST/PUT request.
-- 301: Permanent Redirect
-- 302: Temporary Redirect
-- 304: The is status code used for browser caching. If the response has not been modified, the client/user can continue to use the same response/cached version
-- 404: Not Found
-- 500: Internal Server Error
+Or more simply: Clients sent HTTP requests, and servers send back HTTP Responses.
 
 ## State
+HTTP is **stateless* as each request/response is completely independent of previous ones.
+Applications which create state (logged in) are created despite HTTP's stateless transfer of information.
+Methods for this include Session ID's and Caching.
 
 ### Sessions
 When a server sends a unique token (called a **session identifier** to the client, and the client appends this token as part of the request for identification.
@@ -235,14 +177,77 @@ Cookies are set by the `set cookie` response heaer and will be sent to the serve
 Asynchronous JavaScript and XML: Allows browsers to issue requests and process responses *without full page refresh*
 `callback`s are executed to handle the asynchronous responses and can refresh the page as the responses are returned.
 
-# Security
+## DNS
+DNS (Domain Name System) is a distributed system which stores Key/Value table with URI as Key and IP address as key.
+If Network Interface has no stored the IP Address, then a DNS Request is sent to get the assiciated IP Address.
 
-## Security risks in HTTP
+## URLs
 
-### Mitigating HTTP Security Risks
+### Components of URLs
+5 Parts:
+1. Scheme (aka Protocol): `http`, `ftp`, `mailto` `git`.  The first part before the `://`
+2. Host: `www.example.com`. Tells client where teh resources is hosted/located
+3. Port (Optional): `:88`. Only required to override the default port
+4. Path (Optional): `/home/`. The resource being requested from host.
+5. Query String (Optional): `?item=book`. Made of query parameters (name/value pairs) used to send data to the server.
 
-## TLS Services
+Default Port: `80` used for HTTP requests
 
-## Client-Server Model of Web Interactions
+### Query Strings
+Optional URL portion which adds search parameters.
 
-### Role of HTTP within Client-Server Model
+#### Components
+- `?` => reserved character marking the start
+- `search=ruby` => parameter name/value pair
+- `&` => reserved character to add more parameters
+
+#### Limitations:
+- URL (including Query String) limited at 2048 characters
+- Visible in URL: not usable for sensitive information
+- Spaces & Special Characters must be encoded using `%` followed by the ASCII code of reserved Characters
+
+#### When to Encode:
+1. No corresponding character in ASCII Character set
+2. Character is unsave because it is it used for encoding other characters. `%#<>{}[]~`` and more
+3. Characters reserved in URL scheme `/?:@&`
+
+Non-Encoded Characters => `$-_.+!'{}"`
+
+# HTTP Request/Response Components
+
+***SOMETHING HERE***
+
+# TLS
+Provides the following:
+- Encryption: a process of encoding a message so that it can only be read by those with an authorized means of decoding the message
+- Authentication: a process to verify the identity of a particular party in the message exchange
+- Integrity: a process to detect whether a message has been interfered with or faked
+
+## TLS Encryption
+TLS Protocol adds Security to HTTP Communications Using Symmetric and Asymmetric Key Encryption.
+- Initial Key Encryption is asymmetrically entrypted
+- All subsequent communications are symmetrically encrypted.
+
+Symmetric Key Encryption: Both parties have a copy of the same key to encrypt and decrypt the message.
+
+Asymmetric Key Encryption: Uses a Public to encrypt messages and Private Key to decrypt messages. This only works one way.
+
+### TLS Handshake
+TLS Handshake is the process by which client and server exchange encryption keys.
+TLS Handshake must be performed before secure data exchange can begin.
+1. `ClientHello` to list potential TLS and Cipher Protocols
+2. `ServerHello` to finalize protocol and sent certificate containin public key. `ServerHelloDone` to complete step.
+3. `ClientKeyExchange` sending assymetric key and `ChangeCipherSpec` flag indicates to use symmetric key moving forward and `Finished` flag to complete step.
+4. `ChangeCipherSpec` flag confirms us of symmetric key moving forward and `Finished` flag to complete handshake.
+
+## TLS Authentication
+Certificates are issued to authenticate Websites.
+Certificates are issued by Certificate Authorities.
+Root CA's are the base authorities which need no additional signature.
+Root CA's either sign off on Intermedate CA's or directly on a Site. 
+They represent the end of the Chain of Trust.
+
+## TLS Integrity
+TLS ensures Integrity by using Message Authentication Codes (MACs) which are created using a hashing algorithm.
+The sender wiill create a digest derived form the original data using a pre-agreed hashing value, then encrypt the original data with the symmetric key.
+The receiver will decrypt th data using the symmetric key and create a digest using the same hash value and match it to the digest from the sender to confirm integrity.
